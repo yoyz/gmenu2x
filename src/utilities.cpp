@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 //for browsing the filesystem
+#include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <dirent.h>
@@ -195,7 +196,7 @@ int intTransition(int from, int to, long tickStart, long duration, long tickNow)
 	if (tickNow<0) tickNow = SDL_GetTicks();
 	float elapsed = (float)(tickNow-tickStart)/duration;
 	//                    elapsed                 increments
-	return constrain(round(elapsed*(to-from)),from,to);
+	return constrain(round(elapsed*(to-from)),(float)from,(float)to);
 }
 
 string exec(const char* cmd) {
